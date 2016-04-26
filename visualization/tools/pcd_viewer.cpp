@@ -141,6 +141,8 @@ printHelp (int, char **argv)
   print_info ("\n");
   print_info ("                     -optimal_label_colors    = maps existing labels to the optimal sequential glasbey colors, label_ids will not be mapped to fixed colors (default "); print_value ("disabled"); print_info (")\n");
   print_info ("\n");
+  print_info ("                     -h                       = print this usage information and exit\n");
+  print_info ("\n");
 
   print_info ("\n(Note: for multiple .pcd files, provide multiple -{fc,ps,opaque,position,orientation} parameters; they will be automatically assigned to the right file)\n");
 }
@@ -222,7 +224,10 @@ main (int argc, char** argv)
 
   print_info ("The viewer window provides interactive commands; for help, press 'h' or 'H' from within the window.\n");
 
-  if (argc < 2)
+  bool help = false;
+  pcl::console::parse_argument (argc, argv, "-h", help);
+
+  if (argc < 2 || help)
   {
     printHelp (argc, argv);
     return (-1);
